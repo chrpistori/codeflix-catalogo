@@ -9,7 +9,13 @@ class MainTest {
 
     @Test
     void testMain() {
-        Main.main(new String[]{});
-        Assertions.assertNotNull(Main.class);
+        // Given
+        String[] args = {};
+
+        // When
+        Main.main(args);
+
+        // Then
+        Assertions.assertTrue(true, "Main method executed successfully");
     }
 }
