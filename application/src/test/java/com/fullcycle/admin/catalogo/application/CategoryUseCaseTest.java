@@ -8,8 +8,11 @@ class CategoryUseCaseTest {
 
     @Test
     void testExecute() {
+        // Given
+        CategoryUseCase useCase = new CategoryUseCase();
+
         // When
-        Category category = CategoryUseCase.execute();
+        Category category = useCase.execute();
 
         // Then
         assertNotNull(category);
