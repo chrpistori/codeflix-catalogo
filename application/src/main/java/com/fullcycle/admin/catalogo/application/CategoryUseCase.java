@@ -1,6 +1,6 @@
 package com.fullcycle.admin.catalogo.application;
 
-import com.fullcycle.admin.catalog.domain.Category;
+import com.fullcycle.admin.catalog.domain.category.Category;
 
 public class CategoryUseCase {
     public Category execute() {

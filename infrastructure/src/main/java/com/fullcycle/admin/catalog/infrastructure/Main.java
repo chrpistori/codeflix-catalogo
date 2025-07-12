@@ -1,6 +1,6 @@
 package com.fullcycle.admin.catalog.infrastructure;
 
-import com.fullcycle.admin.catalog.domain.Category;
+import com.fullcycle.admin.catalog.domain.category.Category;
 import com.fullcycle.admin.catalogo.application.CategoryUseCase;
 
 public class Main {
