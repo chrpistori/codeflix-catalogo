@@ -1,6 +1,8 @@
 package com.fullcycle.admin.catalog.domain;
 
 import com.fullcycle.admin.catalog.domain.category.Category;
+import com.fullcycle.admin.catalog.domain.exceptions.DomainException;
+import com.fullcycle.admin.catalog.domain.validation.handler.ThrowsValidationHandler;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +14,9 @@ class CategoryTest {
         final var expectedDescription = "Action and adventure movies";
         final var expectedIsActive = true;
 
-        final var activeCategory = Category.newCategory(expectedName, expectedDescription, expectedIsActive);
+        final var activeCategory = Category.newCategory(expectedName,
+                                                        expectedDescription,
+                                                        expectedIsActive);
 
         assertNotNull(activeCategory);
         assertNotNull(activeCategory.getId());
@@ -24,4 +28,25 @@ class CategoryTest {
         assertNull(activeCategory.getDeletedAt());
     }
 
+    @Test
+    public void givenAnInvalidNullName_whenCallNewCategoryAndValidate_thenShouldReceiveError() {
+        final String expectedName = null;
+        final var expectedErrorCount = 1;
+        final var expectedErrorMessage = "'name' should not be null or empty";
+        final var expectedDescription = "Action and adventure movies";
+        final var expectedIsActive = true;
+
+        final var activeCategory = Category.newCategory(expectedName,
+                                                        expectedDescription,
+                                                        expectedIsActive);
+
+        final var actualException = assertThrows(DomainException.class, () -> {
+            activeCategory.validate(new ThrowsValidationHandler());
+        });
+
+        assertEquals(expectedErrorCount, actualException.getErrors().size());
+        assertEquals(expectedErrorMessage,
+                     actualException.getErrors().get(0).message());
+
+    }
 }
